@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRC20 API - 企业级TRON区块链接口服务 | Professional TRON Blockchain API Service</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij4KICA8dGV4dCB4PSIzMiIgeT0iNDgiIGZvbnQtc2l6ZT0iNDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcHBsZSBDb2xvciBFbW9qaSwgU2Vnb2UgVUkgRW1vamksIE5vdG8gQ29sb3IgRW1vamkiPuKaoeKaoTwvdGV4dD4KPC9zdmc+">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij4KICA8dGV4dCB4PSIzMiIgeT0iNDgiIGZvbnQtc2l6ZT0iNDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcHBsZSBDb2xvciBFbW9qaSwgU2Vnb2UgVUkgRW1vamksIE5vdG8gQ29sb3IgRW1vamkiPuKaoeKaoTwvdGV4dD4KPC9zdmc+">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="TRC20 API是专业的TRON区块链接口服务，提供钱包管理、余额查询、转账交易等完整功能。基于Node.js开发，高性能、稳定可靠的企业级API解决方案。Professional TRON blockchain API service with wallet management, balance query, transaction features.">
+    <meta name="keywords" content="TRC20 API, TRON API, 波场API, 区块链接口, TRX转账, USDT-TRC20, 钱包API, 区块链开发, TRON blockchain, cryptocurrency API, digital wallet, blockchain service">
+    <meta name="author" content="TRC20 API Team">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<%= currentDomain %>">
+    <meta property="og:title" content="TRC20 API - 企业级TRON区块链接口服务">
+    <meta property="og:description" content="专业的TRON区块链接口服务，提供完整的钱包管理、余额查询、转账交易等功能">
+    <meta property="og:image" content="<%= currentDomain %>/static/images/trc20-api-banner.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="<%= currentDomain %>">
+    <meta property="twitter:title" content="TRC20 API - Professional TRON Blockchain Service">
+    <meta property="twitter:description" content="Enterprise-grade TRON blockchain API service with comprehensive wallet and transaction features">
+    <meta property="twitter:image" content="<%= currentDomain %>/static/images/trc20-api-banner.jpg">
+
+    <!-- Language alternate -->
+    <link rel="alternate" hreflang="zh-CN" href="<%= currentDomain %>">
+    <link rel="alternate" hreflang="en" href="<%= currentDomain %>/en">
+    <link rel="canonical" href="<%= currentDomain %>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .top-banner {
+            background: linear-gradient(135deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 0 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .top-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="3" fill="rgba(255,255,255,0.05)"/><circle cx="40" cy="60" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 16px;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            margin: 8px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #4158d0;
+            border-color: white;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border-color: rgba(255,255,255,0.8);
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #4158d0;
+        }
+
+        .main-content {
+            background: white;
+            margin-top: -60px;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            text-align: center;
+            margin-bottom: 48px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 24px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            border: 1px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border-color: #4158d0;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4158d0;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #4158d0 0%, #c850c0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin: 48px 0;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 40px 24px;
+            background: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .feature-card:hover {
+            border-color: #4158d0;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(65,88,208,0.12);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, #4158d0 0%, #c850c0 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .feature-desc {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .companies-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+            margin-top: 80px;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .company-logo {
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #666;
+            font-size: 1.1rem;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .company-logo:hover {
+            border-color: #4158d0;
+            color: #4158d0;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .contact-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .contact-desc {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 32px;
+        }
+
+        .contact-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 12px 0;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            border-bottom-color: white;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* 悬浮客服样式 */
+        .floating-service {
+            position: fixed;
+            right: 20px;
+            bottom: 80px;
+            z-index: 1000;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50px;
+            padding: 12px 20px;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .floating-service:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .floating-service a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .floating-service .icon {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        .floating-service .text {
+            white-space: nowrap;
+        }
+
+        /* 移动端优化 - 简洁美观 */
+        @media (max-width: 768px) {
+            /* 悬浮元素优化 */
+            .floating-service {
+                right: 20px;
+                bottom: 90px;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            }
+
+            .floating-service .text {
+                display: none;
+            }
+
+            .floating-service .icon {
+                margin: 0;
+                font-size: 1.8rem;
+            }
+
+            .floating-service:hover {
+                transform: translateY(-3px) scale(1.1);
+                box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
+            }
+
+            /* 顶部横幅优化 */
+            .top-banner {
+                padding: 80px 0 100px;
+                position: relative;
+            }
+
+            .hero-title {
+                font-size: 2.8rem;
+                margin-bottom: 20px;
+            }
+
+            .hero-subtitle {
+                font-size: 1.3rem;
+                margin-bottom: 12px;
+            }
+
+            .hero-desc {
+                font-size: 1rem;
+                line-height: 1.7;
+                margin-bottom: 30px;
+            }
+
+            /* 主内容区域优化 */
+            .main-content {
+                padding: 50px 25px;
+                margin: -50px 15px 0;
+                border-radius: 12px;
+                box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 12px;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+                margin-bottom: 40px;
+            }
+
+            /* 统计数据网格优化 */
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                margin: 50px 0;
+            }
+
+            .stat-item {
+                padding: 30px 20px;
+                border-radius: 15px;
+            }
+
+            .stat-number {
+                font-size: 2.2rem;
+                margin-bottom: 10px;
+            }
+
+            .stat-label {
+                font-size: 0.9rem;
+            }
+
+            /* 特性网格优化 */
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                margin: 50px 0;
+            }
+
+            .feature-card {
+                padding: 35px 25px;
+                border-radius: 12px;
+                border: 2px solid #f8f9fa;
+            }
+
+            .feature-icon {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 20px;
+                border-radius: 15px;
+            }
+
+            .feature-title {
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+            }
+
+            /* 按钮优化 */
+            .btn {
+                display: block;
+                margin: 12px 0;
+                text-align: center;
+                padding: 18px 32px;
+                font-size: 1.1rem;
+                border-radius: 8px;
+            }
+
+            /* 公司合作部分优化 */
+            .companies-section {
+                padding: 80px 0;
+                margin-top: 60px;
+            }
+
+            .companies-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+
+            .company-logo {
+                padding: 25px 15px;
+                border-radius: 10px;
+                font-size: 1rem;
+            }
+
+            /* 联系部分优化 */
+            .contact-section {
+                padding: 50px 25px;
+                margin: 50px 0;
+                border-radius: 15px;
+            }
+
+            .contact-title {
+                font-size: 1.6rem;
+                margin-bottom: 12px;
+            }
+
+            .contact-desc {
+                font-size: 1rem;
+                margin-bottom: 25px;
+            }
+        }
+
+        /* 超小屏幕优化 */
+        @media (max-width: 480px) {
+            .floating-service {
+                width: 55px;
+                height: 55px;
+                right: 15px;
+                bottom: 80px;
+            }
+
+            .floating-service .icon {
+                font-size: 1.6rem;
+            }
+
+            .hero-title {
+                font-size: 2.4rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .main-content {
+                padding: 40px 20px;
+                margin: -40px 10px 0;
+            }
+
+            .stats-grid {
+                gap: 15px;
+                margin: 40px 0;
+            }
+
+            .stat-item {
+                padding: 25px 15px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .feature-card {
+                padding: 30px 20px;
+            }
+
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .companies-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .btn {
+                padding: 16px 28px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 悬浮客服 -->
+    <div class="floating-service">
+        <a href="https://t.me/king_orz" target="_blank">
+            <span class="icon">✈️</span>
+            <span class="text">联系客服</span>
+        </a>
+    </div>
+
+    <!-- 顶部横幅 -->
+    <div class="top-banner">
+        <div class="container">
+            <h1 class="hero-title">TRC20 API</h1>
+            <div class="hero-subtitle">企业级TRON区块链接口服务</div>
+            <div class="hero-desc">
+                TRC20 API 3.0 - Node.js版本，基于Express.js全栈框架构建，充分发挥JavaScript异步非阻塞I/O优势。专为TRON网络设计的实时区块链接口服务，前后端技术栈统一、npm生态丰富。提供完整的钱包管理、余额查询、交易处理功能，是全栈JavaScript开发和实时应用的理想选择。
+            </div>
+            <div class="cta-buttons">
+                <a href="<%= currentDomain %>/docs" class="btn btn-primary">开始使用</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="main-content">
+            <!-- 多语言版本介绍 -->
+            <div class="section">
+                <h2 class="section-title">🚀 多语言版本支持</h2>
+                <div class="section-subtitle">一套API，四种语言实现，满足不同技术栈的开发需求</div>
+
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 12px; margin-bottom: 40px; text-align: center;">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 20px; font-weight: 600;">🎯 企业级多语言解决方案</h3>
+                    <p style="font-size: 1.2rem; opacity: 0.9; max-width: 800px; margin: 0 auto;">无论您的团队使用什么技术栈，我们都为您准备了最适合的解决方案。每个版本都经过精心优化，确保在对应语言生态中发挥最佳性能。</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card" style="border: 3px solid #777BB4; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+                        <div class="feature-icon" style="background: linear-gradient(135deg, #777BB4, #4F5B93);">
+                            <span style="font-weight: bold; font-size: 1.2rem;">PHP</span>
+                        </div>
+                        <div class="feature-title" style="color: #777BB4;">PHP 版本</div>
+                        <div class="feature-desc">
+                            <strong>ThinkPHP 5.0 框架</strong><br>
+                            • 成熟稳定的Web开发语言<br>
+                            • 完整的MVC架构设计<br>
+                            • 丰富的区块链扩展库<br>
+                            • 部署简单，运维成本低<br>
+                            <div style="margin-top: 15px; padding: 8px; background: #e3f2fd; border-radius: 6px; color: #1976d2; font-weight: 600; font-size: 0.9rem;">
+                                ⭐ 推荐指数: ⭐⭐⭐⭐⭐
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card" style="border: 3px solid #00ADD8; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+                        <div class="feature-icon" style="background: linear-gradient(135deg, #00ADD8, #007D9C);">
+                            <span style="font-weight: bold; font-size: 1.1rem;">Go</span>
+                        </div>
+                        <div class="feature-title" style="color: #00ADD8;">Golang 版本</div>
+                        <div class="feature-desc">
+                            <strong>高性能云原生架构</strong><br>
+                            • 极致的并发处理性能<br>
+                            • 内存占用低，运行效率高<br>
+                            • 原生支持Docker容器化<br>
+                            • 适合高并发场景部署<br>
+                            <div style="margin-top: 15px; padding: 8px; background: #e8f5e8; border-radius: 6px; color: #2e7d32; font-weight: 600; font-size: 0.9rem;">
+                                ⚡ 性能之王: ⚡⚡⚡⚡⚡
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card" style="border: 3px solid #3776ab; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+                        <div class="feature-icon" style="background: linear-gradient(135deg, #3776ab, #ffd343);">
+                            <span style="font-size: 1.5rem;">🐍</span>
+                        </div>
+                        <div class="feature-title" style="color: #3776ab;">Python 版本</div>
+                        <div class="feature-desc">
+                            <strong>Flask 轻量级框架</strong><br>
+                            • 简洁优雅的代码风格<br>
+                            • 丰富的数据处理库<br>
+                            • 强大的机器学习生态<br>
+                            • 快速原型开发首选<br>
+                            <div style="margin-top: 15px; padding: 8px; background: #fff3e0; border-radius: 6px; color: #f57c00; font-weight: 600; font-size: 0.9rem;">
+                                🚀 开发效率: 🚀🚀🚀🚀🚀
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card" style="border: 4px solid #68a063; background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); box-shadow: 0 8px 32px rgba(104,160,99,0.2);">
+                        <div class="feature-icon" style="background: linear-gradient(135deg, #68a063, #8cc84b); box-shadow: 0 4px 15px rgba(104,160,99,0.3);">
+                            <span style="font-weight: bold; font-size: 1.1rem;">JS</span>
+                        </div>
+                        <div class="feature-title" style="color: #68a063; font-size: 1.5rem;">⭐ Node.js 版本 (当前)</div>
+                        <div class="feature-desc">
+                            <strong>Express.js 全栈框架</strong><br>
+                            • 前后端统一JavaScript语言<br>
+                            • 异步非阻塞I/O模型<br>
+                            • 庞大的npm生态系统<br>
+                            • 实时应用开发利器<br>
+                            <div style="margin-top: 15px; padding: 10px; background: linear-gradient(135deg, #e8f5e8, #c8e6c9); border-radius: 6px; color: #2e7d32; font-weight: 600; font-size: 0.9rem; border: 2px solid #4caf50;">
+                                💻 全栈首选: 💻💻💻💻💻
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; padding: 30px; border-radius: 12px; text-align: center; margin: 40px 0;">
+                    <h3 style="font-size: 1.6rem; margin-bottom: 15px; font-weight: 600;">🎉 一次购买，四种语言，无限可能！</h3>
+                    <p style="font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto;">无论您的团队使用什么技术栈，我们都为您准备了最适合的解决方案。每个版本都经过精心优化，确保在对应语言生态中发挥最佳性能。</p>
+                </div>
+            </div>
+
+            <!-- 数据统计 -->
+            <div class="section">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">系统可用性</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">&lt;100ms</div>
+                        <div class="stat-label">平均响应时间</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">每秒处理请求</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">技术支持</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 核心特性 -->
+            <div class="section">
+                <h2 class="section-title">核心特性</h2>
+                <div class="section-subtitle">专业的TRON区块链接口，为企业级应用而生</div>
+
+                <div class="features-grid">
+                    <% pageData.features.forEach(function(feature) { %>
+                    <div class="feature-card">
+                        <div class="feature-icon"><%= feature.icon %></div>
+                        <div class="feature-title"><%= feature.title %></div>
+                        <div class="feature-desc"><%= feature.desc %></div>
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+
+            <!-- 联系方式 -->
+            <div class="contact-section">
+                <div class="contact-title">获取技术支持</div>
+                <div class="contact-desc">购买正版源码，享受专业技术支持和定制化服务</div>
+                <a href="https://t.me/king_orz" target="_blank" class="contact-link">
+                    联系开发者 @king_orz
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 合作伙伴 -->
+    <div class="companies-section">
+        <div class="container">
+            <h2 class="section-title">他们都在使用</h2>
+            <div class="section-subtitle">为各行业提供可靠的区块链基础设施服务</div>
+
+            <div class="companies-grid">
+                <div class="company-logo">金融科技</div>
+                <div class="company-logo">数字货币交易所</div>
+                <div class="company-logo">区块链钱包</div>
+                <div class="company-logo">DeFi应用</div>
+                <div class="company-logo">游戏平台</div>
+                <div class="company-logo">企业支付</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer">
+        <div class="container">
+            <p>最后更新：<%= updateTime %></p>
+            <p>Powered by TRC20 API & Node.js</p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // 页面初始化
+        document.addEventListener('DOMContentLoaded', function() {
+        });
+
+        // 悬浮客服动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const floatingService = document.querySelector('.floating-service');
+            if (floatingService) {
+                setTimeout(() => {
+                    floatingService.style.animation = 'bounce 1s ease-in-out';
+                }, 2000);
+            }
+        });
+
+        // 添加弹跳动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes bounce {
+                0%, 20%, 60%, 100% {
+                    transform: translateY(0);
+                }
+                40% {
+                    transform: translateY(-10px);
+                }
+                80% {
+                    transform: translateY(-5px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
