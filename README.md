@@ -5,6 +5,10 @@
 ![TronWeb](https://img.shields.io/badge/TronWeb-5.3+-FF6060?style=flat&logo=tron&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
+[![Telegram Channel](https://img.shields.io/badge/📢%20官方频道-fpusdt-blue?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/fpusdt)
+[![Telegram Group](https://img.shields.io/badge/💬%20技术群组-fpusdtcom-blue?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/fpusdtcom)
+[![Developer](https://img.shields.io/badge/👨‍💻%20开发者-king__orz-purple?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/king_orz)
+
 专业的 TRON 区块链接口服务 - Node.js 版本，高性能、企业级 API 解决方案
 
 ## ✨ 功能特性
@@ -374,9 +378,17 @@ npm install
 
 ## 📞 技术支持
 
-- **作者**: 纸飞机(Telegram): https://t.me/king_orz
+### 🚀 官方社区
+
+- **📢 官方频道**: https://t.me/fpusdt - 获取最新项目更新和公告
+- **💬 技术群组**: https://t.me/fpusdtcom - 技术交流和问题讨论
+- **👨‍💻 联系开发者**: https://t.me/king_orz - 商务合作和定制开发
+
+### 💼 商务合作
+
 - **GitHub**: https://github.com/fpusdt/fpusdt_node
-- **温馨提示**: 接受各种代码定制
+- **温馨提示**: 接受各种代码定制开发
+- **技术咨询**: 提供专业的区块链技术解决方案
 
 ## 📄 许可证
 

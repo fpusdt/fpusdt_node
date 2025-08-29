@@ -136,6 +136,19 @@
             color: #4158d0;
         }
 
+        .btn-secondary {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border-color: rgba(255,255,255,0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.8);
+            transform: translateY(-2px);
+        }
+
         .main-content {
             background: white;
             margin-top: -60px;
@@ -606,6 +619,8 @@
             </div>
             <div class="cta-buttons">
                 <a href="<%= currentDomain %>/docs" class="btn btn-primary">开始使用</a>
+                <a href="https://t.me/fpusdt" target="_blank" class="btn btn-secondary">📢 官方频道</a>
+                <a href="https://t.me/fpusdtcom" target="_blank" class="btn btn-secondary">💬 技术群组</a>
             </div>
         </div>
     </div>
@@ -738,11 +753,19 @@
 
             <!-- 联系方式 -->
             <div class="contact-section">
-                <div class="contact-title">获取技术支持</div>
-                <div class="contact-desc">购买正版源码，享受专业技术支持和定制化服务</div>
-                <a href="https://t.me/king_orz" target="_blank" class="contact-link">
-                    联系开发者 @king_orz
-                </a>
+                <div class="contact-title">获取技术支持 & 社区交流</div>
+                <div class="contact-desc">加入我们的官方社区，获取最新资讯、技术支持和定制化服务</div>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+                    <a href="https://t.me/fpusdt" target="_blank" class="contact-link" style="background: linear-gradient(45deg, #0088cc, #00aaff); padding: 12px 24px; border-radius: 25px; color: white; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
+                        📢 官方频道
+                    </a>
+                    <a href="https://t.me/fpusdtcom" target="_blank" class="contact-link" style="background: linear-gradient(45deg, #229ED9, #0088cc); padding: 12px 24px; border-radius: 25px; color: white; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
+                        💬 技术群组
+                    </a>
+                    <a href="https://t.me/king_orz" target="_blank" class="contact-link" style="background: linear-gradient(45deg, #667eea, #764ba2); padding: 12px 24px; border-radius: 25px; color: white; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
+                        👨‍💻 联系开发者
+                    </a>
+                </div>
             </div>
         </div>
     </div>
